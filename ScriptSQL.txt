@@ -1,0 +1,54 @@
+DROP DATABASE livraria;
+
+CREATE DATABASE livraria;
+
+USE livraria;
+
+CREATE TABLE genero (
+idGenero INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45)
+);
+
+CREATE TABLE autor (
+idAutor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+sobrenome VARCHAR(45),
+dtNasc DATE,
+Nacionalidade VARCHAR(45),
+fkgeneroPrincipal INT,
+	CONSTRAINT fkgeneroPrincipal
+		FOREIGN KEY (fkgeneroPrincipal) REFERENCES genero(idGenero)
+);
+
+CREATE TABLE livro (
+idLivro INT PRIMARY KEY AUTO_INCREMENT,
+titulo VARCHAR(45),
+fkAutor INT,
+	CONSTRAINT fkAutor
+		FOREIGN KEY (fkAutor) REFERENCES autor(idAutor),
+fkGenero INT,
+	CONSTRAINT fkGenero
+		FOREIGN KEY (fkGenero) REFERENCES genero(idGenero),
+preçoCompra DECIMAL(3,2),
+preçoVenda DECIMAL(3,2),
+dtLancamento DATE,
+review INT	
+);
+
+CREATE TABLE estoque (
+idEstoque INT PRIMARY KEY AUTO_INCREMENT,
+fkLivro INT,
+	CONSTRAINT fkLivro
+		FOREIGN KEY (fkLivro) REFERENCES livro(idLivro),
+quantidade INT
+); 
+
+INSERT INTO genero VALUES
+(DEFAULT, 'Ficção'),
+(DEFAULT, 'Romance'),
+(DEFAULT, 'Suspense'),
+(DEFAULT, 'Ação');
+
+INSERT INTO autor VALUES
+(DEFAULT, 'Stephen', 'King', '1947-21-09', 'Estadunidense', 3),
+(DEFAULT, 'Raphael', 'Montes', '1947-21-09', 'Estadunidense', 3),
