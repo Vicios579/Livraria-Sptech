@@ -4,13 +4,13 @@ function listar() {
 
     var instrucaoSql = `
         select 
-livro.id,
+livro.idLivro,
 livro.titulo,
 livro.precoCompra,
 livro.precoVenda,
 autor.nome as nomeAutor,
 genero.nome as nomeGenero
- from livro join autor on autor.id = livro.fkAutor join genero on genero.id = livro.fkGenero;
+ from livro join autor on autor.idAutor = livro.fkAutor join genero on genero.idGenero = livro.fkGenero;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -18,10 +18,10 @@ genero.nome as nomeGenero
 
 
 
-function cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda) {
+function cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda, review, quantidade) {
 
     var instrucaoSql = `
-        INSERT INTO livro (titulo, fkAutor, fkGenero, precoCompra, precoVenda) VALUES ('${titulo}', '${fkAutor}', '${fkGenero}', '${precoCompra}', '${precoVenda}');
+        INSERT INTO livro (titulo, fkAutor, fkGenero, precoCompra, precoVenda, review, quantidade) VALUES ('${titulo}', '${fkAutor}', '${fkGenero}', '${precoCompra}', '${precoVenda}', '${review}', '${quantidade}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

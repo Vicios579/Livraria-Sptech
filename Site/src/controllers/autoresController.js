@@ -20,20 +20,29 @@ var Numéricos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 function cadastrar(req, res) {
     var nome = req.body.nome;
+    var sobrenome = req.body.sobrenome;
+    var nacionalidade  = req.body.nacionalidade
+    var fkGeneroPrincipal = req.body.fkGeneroPrincipal
 
     for(var i = 0; i <= Caracteres.length; i++) {
     
             if(nome.includes(Caracteres[i]) || nome.includes(Numéricos[i])) {
-
+                console.log(nome)
                 res.status(400).send("O nome do autor não pode conter caracteres especiais nem numéricos!")
                 return false;
             }
         }
 
     if (nome == undefined) {
-        res.status(400).send("O título está indefinido!");
+        res.status(400).send("O nome está indefinido!");
+    } else if (sobrenome == undefined) {
+        res.status(400).send("O sobrenome está indefinido!");
+    } else if (nacionalidade == undefined) {
+        res.status(400).send("A nacionalidade está indefinido!");
+    } else if (fkGeneroPrincipal == undefined) {
+        res.status(400).send("O gênero principal está indefinido!");
     } else {
-        autoresModel.cadastrar(nome)
+        autoresModel.cadastrar(nome, sobrenome, nacionalidade, fkGeneroPrincipal)
             .then(
                 function (resultado) {
                     res.json(resultado);

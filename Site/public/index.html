@@ -118,8 +118,10 @@
             var divitem = document.createElement("div");
             var spanID = document.createElement("span");
             var spanTitulo = document.createElement("span");
+            var spanQuantidade = document.createElement("span")
             var spanPrecoCompra = document.createElement("span");
             var spanPrecoVenda = document.createElement("span");
+            var spanReview = document.createElement("span")
             var spanAutor = document.createElement("span");
             var spanGenero = document.createElement("span");
             
@@ -127,10 +129,12 @@
             var btnEditar = document.createElement("button");
             var btnDeletar = document.createElement("button");
 
-            spanID.innerHTML = "ID: <b>" + item.id + "</b>";
+            spanID.innerHTML = "ID: <b>" + item.idLivro + "</b>";
             spanTitulo.innerHTML = "Título: <b>" + item.titulo + "</b>";
+            spanQuantidade.innerHTML = "Quantidade em estoque: <b>" + item.quantidade + "<b>";
             spanPrecoCompra.innerHTML = "Preço de Compra (R$): <b>" + item.precoCompra + "<b>";
             spanPrecoVenda.innerHTML = "Preço de Venda (R$): <b>" + item.precoVenda + "<b>";
+            spanReview.innerHTML = "Review: <b>" + item.review + "<b>";
             spanAutor.innerHTML = "Autor do Livro: <b>" + item.nomeAutor + "<b>";
             spanGenero.innerHTML = "Gênero: <b>" + item.nomeGenero + "<b>";
 
@@ -144,6 +148,7 @@
             spanPrecoCompra.className = "publicacao-precoCompra";
             spanPrecoVenda.className = "publicacao-precoVenda";
             spanGenero.className = "publicacao-genero";
+            spanReview.className = "publicação-review"
 
             divButtons.className = "div-buttons"
 

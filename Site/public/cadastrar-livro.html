@@ -115,6 +115,18 @@
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
                             </label>
 
+                            <label>
+                                Review do livro:
+                                <br>
+                                <input name="review" id="review" maxlength="20" type="number"></input>
+                            </label>
+
+                            <label>
+                                Quantidade em estoque:
+                                <br>
+                                <input name="quantidade" id="quantidade" maxlength="20" type="number"></input>
+                            </label>
+
 
                             <button>Cadastrar</button>
                         </form>
@@ -150,6 +162,8 @@
             fkAutor: form_postagem.fkAutor_lista.value,
             precoCompra: form_postagem.precoCompra.value,
             precoVenda: form_postagem.precoVenda.value,
+            review: form_postagem.review.value, 
+            quantidade: form_postagem.quantidade.value
         
         }
 

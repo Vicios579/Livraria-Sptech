@@ -710,3 +710,26 @@ canvas {
   margin-bottom: 100px;
   cursor: pointer;
 }
+
+.conteudoPainel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-generos {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.div-base {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 400px;
+}

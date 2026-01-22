@@ -20,7 +20,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="">
+<body onload="listarGeneros()">
 
     <div class="janela">
 
@@ -91,6 +91,40 @@
                                 <br>
                                 <input name="nome" id="nome" maxlength="100" type="text">
                             </label>
+
+                            <br>
+
+                            <label>
+                                Sobrenome:
+                                <br>
+                                <input name="sobrenome" id="sobrenome" maxlength="100" type="text">
+                            </label>
+
+                            <br>
+
+                            <!-- <label>
+                                Data de Nascimento: (AAAA-MM-DD)
+                                <br>
+                                <input name="dtNasc" id="dtNasc" maxlength="100" type="text" >
+                            </label>
+
+                            <br> -->
+
+                            <label>
+                                Nacionalidade:
+                                <br>
+                                <input name="nacionalidade" id="nacionalidade" maxlength="100" type="text">
+                            </label>
+
+                            <br>
+
+                            <label for="genero">Gẽnero Principal:
+                                <br>    
+                                <select name="genero" id="fkGenero_lista">
+                                    <option hidden selected> - Escolha uma opção - </option>
+                                </select>
+                            </label>
+
                             <br>
 
                             <button>Cadastrar</button>
@@ -115,27 +149,16 @@
         document.getElementById("form_postagem").reset();
     }
 
-    // function validar() {
-    //     var corpo = {
-    //         nome: form_postagem.nome.value
-    //     }
 
-    //     for(var i = 0; i <= Caracteres.length; i++) {
-    
-    //         if(corpo.nome.includes(Caracteres[i]) || corpo.nome.includes(Numéricos[i])) {
-    //             alert('O nome do autor não pode conter caracteres especiais nem numéricos!')
-    //             corpo.nome.value = ''
-    //             return false
-    //             console.log('olá')
-    //         }
-    //     }
-    //     console.log('oi')
-    // }
 
     function cadastrar() {
 
         var corpo = {
-            nome: form_postagem.nome.value
+            nome: form_postagem.nome.value,
+            sobrenome: form_postagem.sobrenome.value,
+            nacionalidade: form_postagem.nacionalidade.value,
+            fkGeneroPrincipal: form_postagem.fkGenero_lista.value,
+
         }
 
         fetch(`/autores/cadastrar`, {
@@ -168,6 +191,44 @@
 
         return false;
 
+    }
+
+    function listarGeneros() {
+        fetch("/generos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var lista = document.getElementById("fkGenero_lista");
+                    var fkGenero_item_lista = document.createElement("option");
+                    fkGenero_item_lista.innerHTML = "Nenhuma opção encontrada. Cadastre um gênero na aba lateral."
+                    fkGenero_item_lista.value = "0"
+                    fkGenero_item_lista.disabled = true
+                    fkGenero_item_lista.selected = true
+                    fkGenero_lista.appendChild(fkGenero_item_lista);
+                    throw "Nenhum resultado encontrado";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var item = resposta[i];
+                        console.log(item)
+
+                        var fkGenero_item_lista = document.createElement("option");
+                        fkGenero_item_lista.innerHTML = `<p id="nomeGenero${item.id}">${item.nome}<p>`
+                        fkGenero_item_lista.value = item.id
+                        fkGenero_lista.appendChild(fkGenero_item_lista);
+                    }
+
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+
+        });
     }
 
 

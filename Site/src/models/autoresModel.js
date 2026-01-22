@@ -11,10 +11,10 @@ function listar() {
     return database.executar(instrucaoSql);
 }
 
-function cadastrar(nome) {
+function cadastrar(nome, sobrenome, nacionalidade, fkGeneroPrincipal) {
     
     var instrucaoSql = `
-        INSERT INTO autor (nome) VALUES ('${nome}');
+        INSERT INTO autor (nome, sobrenome, nacionalidade, fkGeneroPrincipal) VALUES ('${nome}', '${sobrenome}', '${nacionalidade}', '${fkGeneroPrincipal}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
